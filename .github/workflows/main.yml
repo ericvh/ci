@@ -2,6 +2,8 @@ name: Linux Kernel Build
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [on-demand-test]  
 
 jobs:
   build:
@@ -12,3 +14,15 @@ jobs:
     steps:
     - name: test
       run: echo hello squidboy
+    - name: self-hosted data
+  ondemand:
+    if: ${{ !github.event.client_payload.passed }}
+    runs-on: self-hosted
+        container:
+          image: ghcr.io/v9fs/docker:latest
+          options: -u root
+        steps:
+        - name: denmand test
+          env:
+            MESSAGE: ${{ github.event.client_payload.message }}
+          run: echo $MESSAGE
