@@ -14,7 +14,6 @@ jobs:
     steps:
     - name: test
       run: echo hello squidboy
-    - name: self-hosted data
   ondemand:
     if: ${{ !github.event.client_payload.passed }}
     runs-on: self-hosted
@@ -23,4 +22,6 @@ jobs:
       options: -u root
     steps:
     - name: denmand test
+      env:
+        MESSAGE: ${{ github.event.client_payload.message }}
       run: echo $MESSAGE
