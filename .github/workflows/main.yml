@@ -18,11 +18,11 @@ jobs:
   ondemand:
     if: ${{ !github.event.client_payload.passed }}
     runs-on: self-hosted
-        container:
-          image: ghcr.io/v9fs/docker:latest
-          options: -u root
-        steps:
-        - name: denmand test
-          env:
-            MESSAGE: ${{ github.event.client_payload.message }}
-          run: echo $MESSAGE
+    container:
+      image: ghcr.io/v9fs/docker:latest
+      options: -u root
+    steps:
+    - name: denmand test
+      env:
+        MESSAGE: ${{ github.event.client_payload.message }}
+      run: echo $MESSAGE
